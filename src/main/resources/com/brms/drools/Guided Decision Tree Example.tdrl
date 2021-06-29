@@ -1,0 +1,14 @@
+package com.brms.drools;
+
+rule "Guided Decision Tree Example_0"
+	when 
+		customer : CustomerData(typeOfLoan == "Car", creditScore > 700)
+	then 
+		customer.setLoanApproval( "Yes" );
+end
+rule "Guided Decision Tree Example_1"
+	when 
+		customer : CustomerData(typeOfLoan == "Car", income < 10000)
+	then 
+		customer.setLoanApproval( "Yes" );
+end

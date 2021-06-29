@@ -1,0 +1,11 @@
+package com.brms.drools;
+
+import java.lang.Number;
+
+rule "Guided"
+	dialect "mvel"
+	when
+		There is a customer with "700" and "5000"  and "2000" and "1000"
+	then
+		Decide the Loan Approval as "Yes"
+end

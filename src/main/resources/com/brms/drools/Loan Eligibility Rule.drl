@@ -1,0 +1,42 @@
+package com.brms.drools;
+
+global java.util.List globalList;
+rule "Loan Eligibility Rule for people with credit score more than 700"
+ruleflow-group "evalLoan"
+
+    when
+        $c : CustomerData((income>loan) &&(creditScore>700))
+    then
+        modify ($c){
+            setLoanApproval("Yes")
+        }
+        System.out.println("Rule fired :Loan Eligibility Rule for people with credit score more than 700 : Loan approval set to " + $c.getLoanApproval());
+
+end
+
+rule "Loan Eligibility Rule for people with credit score less than 700"
+salience 10
+ruleflow-group "evalLoan"
+
+    when
+       $c : CustomerData((income>loan) &&(creditScore<700))
+    then
+        modify ($c){
+             setLoanApproval("No")
+        }
+        System.out.println("Loan Eligibility Rule for people with credit score less than 700 : Benefit set to " + $c.getLoanApproval());
+
+end
+
+rule "Loan Eligibility Rule for people with credit score more than 700 and income lesser than loan"
+ruleflow-group "evalLoan"
+
+    when
+        $c : CustomerData((income<loan) &&(creditScore>700))
+    then
+        modify ($c){
+            setLoanApproval("Maybe")
+        }
+        System.out.println("Rule fired :Loan Eligibility Rule for people with credit score more than 700 : Loan approval set to " + $c.getLoanApproval());
+
+end
